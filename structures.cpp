@@ -61,8 +61,6 @@ int main()
                 ss += buff[2];
                 ss += buff[3];
                 stud_list[a].yearob = stoi(ss);
-                //for (int i = 0; i < 4; i++)
-                //    stud_list[a].yearob += buff[i];
                 ss.clear();
                 buff.erase(0, 5);
 
@@ -70,9 +68,6 @@ int main()
                 a += 1;
                 buff.clear();
             }
-           /* for (int i = 0; i < leng; i++) {
-                cout << stud_list[i] << "\n";
-            };*/
             cout << "По какому параметру нужно найти студентов: 1 - по ФИО, 2 - по году рождения, 3 - по курсу, 4 - по номеру группы: ";
 
             cin >> search;
