@@ -1,13 +1,14 @@
 ﻿#include <iostream>
 #include <string>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
 struct Student
 {
     string fio;
-    string yearob;
+    int yearob;
     int course;
     int group;
 };
@@ -21,7 +22,8 @@ int main()
 {
     setlocale(LC_ALL, "");
     int search = 0;
-    string fio_s, yearob_s;
+    string fio_s;
+        int yearob_s;
     int course_s, group_s;
     int chek = 1;
     while (chek == 1)
@@ -36,84 +38,93 @@ int main()
         {
             int leng = 0;
             string s;
-            ifstream fle("input.txt");
-            while (getline(fle, s))
+            ifstream myfile("input.txt");
+            while (getline(myfile, s))
             {
-                leng += 1;
+                leng++;
             }
-            Student* list = new Student[leng];
+            Student* stud_list = new Student[leng];
             int a = 0;
 
-            fle.close();
+            myfile.close();
             ifstream file("input.txt");
 
             string ss, buff;
             while (getline(file, s))
             {
                 buff.assign(s);
-                list[a].course = buff[0] - '0';
+                stud_list[a].course = buff[0] - '0';
                 buff.erase(0, 2);
 
                 ss += buff[0];
                 ss += buff[1];
-                list[a].group = stoi(ss);
+                stud_list[a].group = stoi(ss);
                 ss.clear();
                 buff.erase(0, 3);
 
-                for (int i = 0; i < 4; i++)
-                    list[a].yearob += buff[i];
+                ss += buff[0];
+                ss += buff[1];
+                ss += buff[2];
+                ss += buff[3];
+                stud_list[a].yearob = stoi(ss);
+                //for (int i = 0; i < 4; i++)
+                //    stud_list[a].yearob += buff[i];
+                ss.clear();
                 buff.erase(0, 5);
 
-                list[a].fio.assign(buff);
+                stud_list[a].fio.assign(buff);
                 a += 1;
                 buff.clear();
             }
+            for (int i = 0; i < leng; i++) {
+                cout << stud_list[i] << "\n";
+            };
             cout << "По какому параметру нужно найти студентов: 1 - по ФИО, 2 - по году рождения, 3 - по курсу, 4 - по номеру группы: ";
 
             cin >> search;
             switch (search) {
-            case(1):
+            case(1): {
                 getline(cin, fio_s);
                 for (int i = 0; i <= leng; i++) {
-                    if (list[i].fio.find(fio_s, 10)) {
-                        cout << list[i].fio << ", " << list[i].course << " курс, " << list[i].group << " группа, " << list[i].yearob << " год рождения; " << endl;
+                    if (stud_list[i].fio.find(fio_s, 10)) {
+                        cout << stud_list[i].fio << ", " << stud_list[i].course << " курс, " << stud_list[i].group << " группа, " << stud_list[i].yearob << " год рождения; " << endl;
                     }
-                    else {
-                        continue;
-                    }
-
                 }
-            case(2):
+                break;
+            }
+            /*case(2):
                 cin >> yearob_s;
                 for (int i = 0; i <= leng; i++) {
-                    if (list[i].yearob.find(yearob_s, 5)) {
-                        cout << list[i].fio << ", " << list[i].course << " курс, " << list[i].group << " группа, " << list[i].yearob << " год рождения; " << endl;
+                    if (stud_list[i].yearob.find(yearob_s)==1) {
+                        cout << stud_list[i].fio << ", " << stud_list[i].course << " курс, " << stud_list[i].group << " группа, " << stud_list[i].yearob << " год рождения; " << endl;
                     }
-                    else {
-                        continue;
+                }*/
+            case(2): {
+                cin >> yearob_s;
+                for (int i = 0; i < leng; i++) {
+                    if (yearob_s == stud_list[i].yearob) {
+                        cout << stud_list[i].fio << ", " << stud_list[i].course << " курс, " << stud_list[i].group << " группа, " << stud_list[i].yearob << " год рождения; " << endl;
                     }
                 }
+                break;
+            }
             case(3): {
                 cin >> course_s;
-                for (int i = 0; i <= leng; i++) {
-                    if (course_s == list[i].course) {
-                        cout << list[i].fio << ", " << list[i].course << " курс, " << list[i].group << " группа, " << list[i].yearob << " год рождения; " << endl;
-                    }
-                    else {
-                        continue;
+                for (int i = 0; i < leng; i++) {
+                    if (course_s == stud_list[i].course) {
+                        cout << stud_list[i].fio << ", " << stud_list[i].course << " курс, " << stud_list[i].group << " группа, " << stud_list[i].yearob << " год рождения; " << endl;
                     }
                 }
+                break;
             }
             case(4):
                 cin >> group_s;
-                for (int i = 0; i <= leng; i++) {
-                    if (group_s == list[i].group) {
-                        cout << list[i].fio << ", " << list[i].course << " курс, " << list[i].group << " группа, " << list[i].yearob << " год рождения; " << endl;
-                    }
-                    else {
-                        continue;
+                for (int i = 0; i < leng; i++) {
+                    if (group_s == stud_list[i].group) {
+                        cout << stud_list[i].fio << ", " << stud_list[i].course << " курс, " << stud_list[i].group << " группа, " << stud_list[i].yearob << " год рождения; " << endl;
                     }
                 }
+                break;
             }
 
 
