@@ -87,10 +87,9 @@ int main()
             cin.ignore();
             switch (search) {
             case(1): {
-                //cin >> fio_s;
                 getline(cin, fio_s);
                 for (int i = 0; i < leng; i++) {
-                    if (true) {
+                    if (fio_s == stud_list[i].fio) {
                         cout << stud_list[i].fio << ", " << stud_list[i].course << " курс, " << stud_list[i].group << " группа, " << stud_list[i].yearob << " год рождения; " << endl;
                     }
                 }
