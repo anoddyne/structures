@@ -1,7 +1,6 @@
 ﻿#include <iostream>
 #include <string>
 #include <fstream>
-#include <regex>
 #include <Windows.h>
 
 using namespace std;
