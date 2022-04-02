@@ -1,7 +1,8 @@
 ﻿#include <iostream>
 #include <string>
 #include <fstream>
-#include <algorithm>
+#include <regex>
+#include <Windows.h>
 
 using namespace std;
 
@@ -20,10 +21,11 @@ ostream& operator<<(ostream& out, const Student obj)
 
 int main()
 {
+    SetConsoleCP(1251);
     setlocale(LC_ALL, "");
     int search = 0;
     string fio_s;
-        int yearob_s;
+    int yearob_s;
     int course_s, group_s;
     int chek = 1;
     while (chek == 1)
@@ -76,17 +78,19 @@ int main()
                 a += 1;
                 buff.clear();
             }
-            for (int i = 0; i < leng; i++) {
+           /* for (int i = 0; i < leng; i++) {
                 cout << stud_list[i] << "\n";
-            };
+            };*/
             cout << "По какому параметру нужно найти студентов: 1 - по ФИО, 2 - по году рождения, 3 - по курсу, 4 - по номеру группы: ";
 
             cin >> search;
+            cin.ignore();
             switch (search) {
             case(1): {
+                //cin >> fio_s;
                 getline(cin, fio_s);
-                for (int i = 0; i <= leng; i++) {
-                    if (stud_list[i].fio.find(fio_s, 10)) {
+                for (int i = 0; i < leng; i++) {
+                    if (true) {
                         cout << stud_list[i].fio << ", " << stud_list[i].course << " курс, " << stud_list[i].group << " группа, " << stud_list[i].yearob << " год рождения; " << endl;
                     }
                 }
